@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id="root">
+        单向数据绑定：<input type="text" v-bind:value="name"/>
+        {{age}}
+    </div>
+    <script>
+        Vue.config.devtools = true;
+        Vue.config.productionTip = false;
+        // 准备一个实例
+        const y = new Vue({
+            el: '#root',
+            data: {
+                name: 'China',
+                age: 12,
+            }
+        })
+    </script>
+
+    <!-- 
+        2024/7/21 MacBook Pro | Google
+        这里插播一件bugs: Vue DevTools 插件检测到Vue，但未显示数据
+
+        1. 右键 Manage extension -> 
+            1.1 service worker (Inactive) -> Application -> Service workers -> Update on reload(not choose, other not choosed default)
+            1.2 Allow access to file URLs -> ture(click)
+        2. 入口文件（main.js）中禁用了 vue 调试工具：Vue.config.devtools = false 把它设置为 true 即可
+        3. 因为使用了 vue 的压缩版本，所以浏览器控制台默认不显示 vue 调试工具，可以在 index.html 中加个判断条件，开发环境时不使用压缩版本
+
+        参考原文：https://blog.csdn.net/lan123456_/article/details/126240872
+
+        Vue DevTools 插件检测到Vue，显示数据，不显示 Root
+
+        1. Vue.js devtools对于纯中文数据的兼容性不是很好，所以会出现点击无任何反应的情况，数据统统改成英文
+
+    -->
+</body>
+</html>
