@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的基本使用</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1.Vue常用按键别名：
+
+            enter
+
+            delete (退格 和 删除)
+
+            esc
+
+            space
+
+            tab （特殊，必须配合 keydown 去使用）
+
+            up
+
+            down
+
+            right
+
+            left
+
+        2.其他按键使用event.key和event.keyCode区分 或者 使用原始key值(多单词组合的按键，
+        比如CapsLock 需要转化为小写开头并用-连接 示例：@keydown.caps-lock = xxx)    
+
+        3.系统修饰键：ctrl、alt、shift、meta
+
+            配合keyup使用：按下系统修饰键，同时按下其他键，随后释放，事件才被触发
+
+            配合keydown使用：正常触发事件，小技巧：@keyup.ctrl.y
+
+        4.也可以使用keyCode直接指定 示例：@keydown.13 = xxx 但不推荐，
+        因不同键盘的编码可能不同，此特性也已经被大部分浏览器抛弃。
+
+        5. vue.config.keyCode.自定义按键名 = 键码，可以去定制按键别名
+    -->
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h1>欢迎来到{{name}}学习</h1>
+        <input type="text" placeholder="按下回车提示输入" @keyup="showInfo"/>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        // 创建 Vue 实例
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'github',
+                age: 18
+            },
+            methods: {
+                showInfo(e) {
+                    alert(e.key, e.keyCode);
+                    // if (e.keyCode !== 13) return;
+                    // alert(e.target.value);
+                },
+            },
+        });
+
+        console.log(vm);
+    </script>
+</body>
+</html>
