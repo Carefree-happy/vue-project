@@ -10,8 +10,14 @@
 <body>
     <!-- 准备一个容器 -->
     <div id="root">
-        单向数据绑定：<input type="text" v-bind:value="name"/>
-        {{age}}
+        <!-- 普通写法 -->
+        单向数据绑定：<input type="text" v-bind:value="name"/><br/>
+        双向数据绑定：<input type="text" v-model:value="name"/>
+        <!-- v-model 只能应用于表单类元素(输入类元素) -->
+
+        <!-- 简写 -->
+        单向数据绑定：<input type="text" :value="name"/><br/>
+        双向数据绑定：<input type="text" v-model:value="name"/>
     </div>
     <script>
         Vue.config.devtools = true;
@@ -24,6 +30,10 @@
                 age: 12,
             }
         })
+
+        // 验证单向数据绑定 document.querySelector('input').value
+
+
     </script>
 
     <!-- 
