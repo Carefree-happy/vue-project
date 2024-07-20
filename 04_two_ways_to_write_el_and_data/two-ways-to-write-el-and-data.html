@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h1>Hello, {{name}}, 你今年{{age}}岁了！</h1>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+        // 创建 Vue 实例
+
+        // el 的两种写法
+        const x = new Vue({
+            // el: '#root', 该用 $mount
+
+            // data 的两种写法：第一种，对象式
+            // data: {
+            //     name: 'China',
+            //     age: 18
+            // },
+
+            // data 的两种写法：第二种，函数式
+            data: function() {
+                console.log('@@@', this); // 一旦使用箭头函数，this 就是指向 window
+                return {
+                    name: 'China',
+                    age: 18
+                }
+            }
+        });
+
+        setTimeout(() => {
+            x.$mount('#root');
+        }, 1000);
+
+
+    </script>
+</body>
+</html>
