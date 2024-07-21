@@ -1,8 +1,7 @@
 <template>
-	<div>
-		<h2>学生姓名：{{name}}</h2>
-		<h2>学生性别：{{sex}}</h2>
-		<input type="text" v-fbind:value="name">
+	<div class="demo">
+		<h2 class="title">学生姓名：{{name}}</h2>
+		<h2 class="atguigu">学生性别：{{sex}}</h2>
 	</div>
 </template>
 
@@ -14,6 +13,15 @@
 				name:'张三',
 				sex:'男'
 			}
-		},
+		}
 	}
 </script>
+
+<style scoped>
+	.demo{
+		background-color: pink;
+	}
+	.atguigu{
+		font-size: 40px;
+	}
+</style>
