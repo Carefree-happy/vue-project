@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <h1 v-text="msg" ref="title"></h1>
-    <button @click="showDOM">点我输出上面的元素</button>
-		<School ref="sch"></School>
-		<Student></Student>
+    <button>点我输出上面的元素</button>
+		<Student name="张三" sex="男" :age="12"></Student>
   </div>
 </template>
 
 <script>
 	//引入组件
-	import School from './components/School'
 	import Student from './components/Student'
 
 export default {
@@ -20,14 +17,7 @@ export default {
     }
   },
   components: {
-    School,
     Student
-  },
-  methods: {
-    showDOM() {
-      console.log(this.$refs.title)
-      console.log(this.$refs.sch)
-    }
   }
 }
 </script>
