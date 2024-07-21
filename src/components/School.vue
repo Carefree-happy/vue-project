@@ -11,8 +11,8 @@
 		name: 'SchoolInfo',
 		data(){
 			return {
-				name:'上海大学',
-				address:'上海宝山'
+				name:'ShangHai',
+				address:'shang hai'
 			}
 		},
 		methods: {

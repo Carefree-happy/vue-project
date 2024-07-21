@@ -10,7 +10,7 @@
 		name:'StudentInfo',
 		data(){
 			return {
-				name:'张三',
+				name:'zhang san',
 				age:18
 			}
 		}
