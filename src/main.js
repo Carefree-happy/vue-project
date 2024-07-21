@@ -8,6 +8,10 @@ import App from './App.vue'
 //关闭vue的生产提示
 Vue.config.productionTip = false
 
+import {hunhe,hunhe2} from './mixin'
+Vue.mixin(hunhe)
+Vue.mixin(hunhe2)
+
 /* 
 	关于不同版本的Vue：
 	
