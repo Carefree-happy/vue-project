@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-		<School></School>
+    <h1 v-text="msg" ref="title"></h1>
+    <button @click="showDOM">点我输出上面的元素</button>
+		<School ref="sch"></School>
 		<Student></Student>
   </div>
 </template>
@@ -13,9 +14,20 @@
 
 export default {
   name: 'App',
+  data() {
+    return {
+      msg: '欢迎学习Vue！'
+    }
+  },
   components: {
     School,
     Student
+  },
+  methods: {
+    showDOM() {
+      console.log(this.$refs.title)
+      console.log(this.$refs.sch)
+    }
   }
 }
 </script>
