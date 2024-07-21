@@ -151,6 +151,8 @@ yarn config set "strict-ssl" false -g
 1. 作用：让样式在局部生效，防止冲突。
 2. 写法：```<style scoped>```
 
+npm view webpack versions
+
 ## 总结TodoList案例
 
 1. 组件化编码流程：
