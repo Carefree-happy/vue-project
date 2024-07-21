@@ -12,7 +12,7 @@
     <div id="root">
         <!-- 普通写法 -->
         单向数据绑定：<input type="text" v-bind:value="name"/><br/>
-        双向数据绑定：<input type="text" v-model:value="name"/>
+        双向数据绑定：<input type="text" v-model:value="name"/><br/>
         <!-- v-model 只能应用于表单类元素(输入类元素) -->
 
         <!-- 简写 -->
@@ -52,6 +52,7 @@
 
         1. Vue.js devtools对于纯中文数据的兼容性不是很好，所以会出现点击无任何反应的情况，数据统统改成英文
 
+        2. 文件名不要有 - ，数字英文下划线即可；文件夹名称可以有 -
     -->
 </body>
 </html>
