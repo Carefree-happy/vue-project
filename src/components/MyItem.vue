@@ -13,17 +13,14 @@
 <script>
 	export default {
 		name:'MyItem',
-		props:['todo', 'checkTodo', 'delTodo'],
-		mounted() {
-			console.log(this.todo)
-		},
+		props:['todo'],
 		methods: {
 			handleChecked(id) {
-				this.checkTodo(id);
+				this.$bus.$emit('checkTodo', id);
 			},
 			handleDelete(id) {
 				if(confirm('确定删除吗？')) {
-					this.delTodo(id);
+					this.$bus.$emit('delTodo', id);
 				}
 			}
 		},

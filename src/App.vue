@@ -3,7 +3,7 @@
 		<div class="todo-container">
 			<div class="todo-wrap">
 				<MyHeader @addTodo="addTodo"/>
-				<MyList :todos="todos" :checkTodo="checkTodo" :delTodo="delTodo"/>
+				<MyList :todos="todos"/>
 				<MyFooter :todos="todos" @clearAllTodo="clearAllTodo" @checkAllTodo="checkAllTodo"/>
 			</div>
 		</div>
@@ -60,6 +60,14 @@
 					todo.done = done
 				})
 			},
+		},
+		mounted() {
+			this.$bus.$on('checkTodo', this.checkTodo);
+			this.$bus.$on('delTodo', this.delTodo);
+		},
+		beforeDestroy() {
+			this.$bus.$off('checkTodo');
+			this.$bus.$off('delTodo');
 		}
 	}
 </script>
