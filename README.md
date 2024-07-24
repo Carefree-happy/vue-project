@@ -333,7 +333,47 @@ npm view webpack versions
    3. 备注：若有多个元素需要过度，则需要使用：```<transition-group>```，且每个元素都要指定```key```值。
 
 ## vue脚手架配置代理
+### 配置服务器代码
+```ash
+npm init -y
+npm install express
 
+node server.js
+```
+
+```js
+const express = require('express');
+const app = express();
+const port = 5000;
+
+// 路由处理 /students 请求
+app.get('/students', (req, res) => {
+  // 示例学生数据
+  const students = [
+    { id: 1, name: 'Alice', age: 20 },
+    { id: 2, name: 'Bob', age: 22 },
+    { id: 3, name: 'Charlie', age: 23 }
+  ];
+  res.json(students);
+});
+
+// 路由处理 /demo/cars 请求
+app.get('/demo/cars', (req, res) => {
+  // 示例汽车数据
+  const cars = [
+    { id: 1, brand: 'Toyota', model: 'Camry' },
+    { id: 2, brand: 'Honda', model: 'Accord' },
+    { id: 3, brand: 'Tesla', model: 'Model S' }
+  ];
+  res.json(cars);
+});
+
+// 启动服务器
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+
+```
 ### 方法一
 
 ​	在vue.config.js中添加如下配置：
