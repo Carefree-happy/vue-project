@@ -4,9 +4,17 @@
 			<!-- 如下代码也能使用，不太建议使用 -->
 			<!-- <input type="checkbox" v-model="todo.done"/> -->
 			<input type="checkbox" :checked="todo.done" @change="handleChecked(todo.id)"/>
-			<span>{{todo.title}}</span>
+			<span v-show="!todo.isEdit">{{todo.title}}</span>
+			<input 
+				type="text" 
+				v-show="todo.isEdit" 
+				:value="todo.title" 
+				@blur="handleBlur(todo,$event)"
+				ref="inputTitle"
+			>
 		</label>
 		<button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
+		<button v-show="!todo.isEdit" class="btn btn-edit" @click="handleEdit(todo)">编辑</button>
 	</li>
 </template>
 
@@ -23,6 +31,24 @@
 				if(confirm('确定删除吗？')) {
 					pubsub.publish('deleteTodo',id)
 				}
+			},
+			//编辑
+			handleEdit(todo){
+				if(Object.hasOwn(todo,'isEdit')){
+					todo.isEdit = true
+				}else{
+					this.$set(todo,'isEdit',true)
+				}
+				// 用于在下一个 DOM 更新周期之后执行回调函数
+				this.$nextTick(function(){
+					this.$refs.inputTitle.focus()
+				})
+			},
+			//失去焦点回调（真正执行修改逻辑）
+			handleBlur(todo,e){
+				todo.isEdit = false
+				if(!e.target.value.trim()) return alert('输入不能为空！')
+				this.$bus.$emit('updateTodo',todo.id,e.target.value)
 			}
 		},
 	}
@@ -62,11 +88,11 @@
 	li:last-child {
 		border-bottom: none;
 	}
-	/* 列表项悬浮，更改背景颜色 */
+
 	li:hover{
 		background-color: #ddd;
 	}
-	/* 列表项悬浮，显示删除按钮 */
+	
 	li:hover button{
 		display: block;
 	}
