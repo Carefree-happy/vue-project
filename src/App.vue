@@ -2,9 +2,9 @@
 	<div id="root">
 		<div class="todo-container">
 			<div class="todo-wrap">
-				<MyHeader :addTodo="addTodo"/>
+				<MyHeader @addTodo="addTodo"/>
 				<MyList :todos="todos" :checkTodo="checkTodo" :delTodo="delTodo"/>
-				<MyFooter :todos="todos" :clearAllTodo="clearAllTodo" :checkAllTodo="checkAllTodo"/>
+				<MyFooter :todos="todos" @clearAllTodo="clearAllTodo" @checkAllTodo="checkAllTodo"/>
 			</div>
 		</div>
 	</div>
