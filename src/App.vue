@@ -7,10 +7,15 @@
 				<MyFooter :todos="todos" @clearAllTodo="clearAllTodo" @checkAllTodo="checkAllTodo"/>
 			</div>
 		</div>
+		<div>
+			<button @click="getStudents">获取学生信息</button>
+			<button @click="getCars">获取汽车信息</button>
+		</div>
 	</div>
 </template>
 
 <script>
+	import axios from 'axios'
 	import pubsub from 'pubsub-js'
 	import MyHeader from './components/MyHeader'
 	import MyList from './components/MyList'
@@ -64,6 +69,29 @@
 				this.todos.forEach((todo)=>{
 					todo.done = done
 				})
+			},
+			getStudents(){
+				// 方式一：
+				axios.get('http://localhost:8081/students').then(
+				// 方式二：
+				// axios.get('/api/students').then(
+					response => {
+						console.log('请求成功了',response.data)
+					},
+					error => {
+						console.log('请求失败了',error.message)
+					}
+				)
+			},
+			getCars(){
+				axios.get('http://localhost:8081/demo/cars').then(
+					response => {
+						console.log('请求成功了',response.data)
+					},
+					error => {
+						console.log('请求失败了',error.message)
+					}
+				)
 			},
 		},
 		mounted() {
