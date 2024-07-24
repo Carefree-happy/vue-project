@@ -2,7 +2,7 @@
 	<div id="root">
 		<div class="todo-container">
 			<div class="todo-wrap">
-				<MyHeader/>
+				<MyHeader :addTodo="addTodo"/>
 				<MyList :todos="todos"/>
 				<MyFooter/>
 			</div>
@@ -29,7 +29,9 @@
 			}
 		},
 		methods: {
-
+			addTodo(x) {
+				this.todos.unshift(x);
+			}
 		}
 	}
 </script>
