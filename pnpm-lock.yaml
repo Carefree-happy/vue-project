@@ -14,6 +14,9 @@ importers:
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
+      pubsub-js:
+        specifier: ^1.9.4
+        version: 1.9.4
       vue:
         specifier: ^2.6.14
         version: 2.7.16
@@ -3102,6 +3105,9 @@ packages:
 
   pseudomap@1.0.2:
     resolution: {integrity: sha512-b/YwNhb8lk1Zz2+bXXpS/LK9OisiZZ1SNsSLxN1x2OXVEhW2Ckr/7mWE5vrC1ZTiJlD9g19jWszTmJsB+oEpFQ==}
+
+  pubsub-js@1.9.4:
+    resolution: {integrity: sha512-hJYpaDvPH4w8ZX/0Fdf9ma1AwRgU353GfbaVfPjfJQf1KxZ2iHaHl3fAUw1qlJIR5dr4F3RzjGaWohYUEyoh7A==}
 
   pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
@@ -7236,6 +7242,8 @@ snapshots:
       ipaddr.js: 1.9.1
 
   pseudomap@1.0.2: {}
+
+  pubsub-js@1.9.4: {}
 
   pump@3.0.0:
     dependencies:

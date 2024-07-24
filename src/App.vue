@@ -11,6 +11,7 @@
 </template>
 
 <script>
+	import pubsub from 'pubsub-js'
 	import MyHeader from './components/MyHeader'
 	import MyList from './components/MyList'
 	import MyFooter from './components/MyFooter.vue'
@@ -43,10 +44,8 @@
 				})
 			},
 			// 删除一个todo
-			delTodo(x) {
-				this.todos = this.todos.filter((e) => {
-					return e.id !== x
-				})
+			deleteTodo(_,id){
+				this.todos = this.todos.filter( todo => todo.id !== id )
 			},
 			// 清除所有已经完成的todo
 			clearAllTodo() {
@@ -63,11 +62,11 @@
 		},
 		mounted() {
 			this.$bus.$on('checkTodo', this.checkTodo);
-			this.$bus.$on('delTodo', this.delTodo);
+			this.pubId = pubsub.subscribe('deleteTodo',this.deleteTodo)
 		},
 		beforeDestroy() {
 			this.$bus.$off('checkTodo');
-			this.$bus.$off('delTodo');
+			pubsub.unsubscribe(this.pubId)
 		}
 	}
 </script>
