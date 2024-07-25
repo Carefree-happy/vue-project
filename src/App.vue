@@ -1,47 +1,26 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <h1 @click="sayHello">我是APP组件</h1>
+  <h2>姓名：{{ name }}</h2>
+  <h2>年龄：{{ age }}</h2>
 </template>
+<script>
+  export default {
+    name: 'APP',
+    setup() {
+      // 数据
+      let name = '张三'
+      let age = 18
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+      // 方法
+      function sayHello() {
+        alert(`我叫${name},我今年${age}岁了，你好呀！`)
+      }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+      return {
+        name,
+        age,
+        sayHello
+      }
+    }
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+</script>
