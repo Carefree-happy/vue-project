@@ -1140,3 +1140,18 @@ module.exports = {
    1. 地址干净，美观 。
    2. 兼容性和hash模式相比略差。
    3. 应用部署上线时需要后端人员支持，解决刷新页面服务端404的问题。
+
+### 14.node手动搭建服务器
+
+```js
+const express = require('express');
+const app = express();
+const port = 5000;
+
+app.use(express.static(__dirname+'/dist'));
+
+// 启动服务器
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+```
