@@ -1,157 +1,39 @@
 <template>
-	<div id="root">
-		<div class="todo-container">
-			<div class="todo-wrap">
-				<MyHeader @addTodo="addTodo"/>
-				<MyList :todos="todos"/>
-				<MyFooter :todos="todos" @clearAllTodo="clearAllTodo" @checkAllTodo="checkAllTodo"/>
-			</div>
-		</div>
-		<div>
-			<button @click="getStudents">获取学生信息</button>
-			<button @click="getCars">获取汽车信息</button>
-		</div>
+	<div class="container">
+		<Category title="美食" >
+			<img src="https://s3.ax1x.com/2021/01/16/srJlq0.jpg" alt="">
+		</Category>
+
+		<Category title="游戏" >
+			<ul>
+				<li v-for="(g,index) in games" :key="index">{{g}}</li>
+			</ul>
+		</Category>
+
+		<Category title="电影">
+			<video controls src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"></video>
+		</Category>
 	</div>
 </template>
 
 <script>
-	import axios from 'axios'
-	import pubsub from 'pubsub-js'
-	import MyHeader from './components/MyHeader'
-	import MyList from './components/MyList'
-	import MyFooter from './components/MyFooter.vue'
-
+	import Category from './components/Category'
 	export default {
 		name:'App',
-		components:{MyHeader,MyList,MyFooter},
+		components:{Category},
 		data() {
 			return {
-				//由于todos是MyHeader组件和MyFooter组件都在使用，所以放在App中（状态提升）
-				todos:JSON.parse(localStorage.getItem('todos')) || []
+				foods:['火锅','烧烤','小龙虾','牛排'],
+				games:['红色警戒','穿越火线','劲舞团','超级玛丽'],
+				films:['《教父》','《拆弹专家》','《你好，李焕英》','《尚硅谷》']
 			}
 		},
-		watch: {
-			todos:{
-				deep:true,
-				handler(value){
-					localStorage.setItem('todos',JSON.stringify(value))
-				}
-			}
-		},
-		methods: {
-			// 添加一个todo
-			addTodo(x) {
-				this.todos.unshift(x);
-			},
-			checkTodo(id) {
-				this.todos.forEach((todo) => {
-					if (todo.id === id) todo.done = !todo.done
-				})
-			},
-			// 更新一个todo
-			updateTodo(id,title){
-				this.todos.forEach((todo) => {
-					if (todo.id === id) todo.title = title
-				})
-			},
-			// 删除一个todo
-			deleteTodo(_,id){
-				this.todos = this.todos.filter( todo => todo.id !== id )
-			},
-			// 清除所有已经完成的todo
-			clearAllTodo() {
-				this.todos = this.todos.filter((todo)=>{
-					return !todo.done
-				})
-			},
-			// 全选or取消全选
-			checkAllTodo(done){
-				this.todos.forEach((todo)=>{
-					todo.done = done
-				})
-			},
-			getStudents(){
-				// 方式一：
-				axios.get('http://localhost:8081/students').then(
-				// 方式二：
-				// axios.get('/api/students').then(
-					response => {
-						console.log('请求成功了',response.data)
-					},
-					error => {
-						console.log('请求失败了',error.message)
-					}
-				)
-			},
-			getCars(){
-				axios.get('http://localhost:8081/demo/cars').then(
-					response => {
-						console.log('请求成功了',response.data)
-					},
-					error => {
-						console.log('请求失败了',error.message)
-					}
-				)
-			},
-		},
-		mounted() {
-			this.$bus.$on('checkTodo', this.checkTodo);
-			this.$bus.$on('updateTodo', this.updateTodo);
-			this.pubId = pubsub.subscribe('deleteTodo',this.deleteTodo)
-		},
-		beforeDestroy() {
-			this.$bus.$off('checkTodo');
-			this.$bus.$off('updateTodo');
-			pubsub.unsubscribe(this.pubId)
-		}
 	}
 </script>
 
-<style>
-	/*base*/
-	body {
-		background: #fff;
-	}
-	.btn {
-		display: inline-block;
-		padding: 4px 12px;
-		margin-bottom: 0;
-		font-size: 14px;
-		line-height: 20px;
-		text-align: center;
-		vertical-align: middle;
-		cursor: pointer;
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-		border-radius: 4px;
-	}
-	.btn-danger {
-		color: #fff;
-		background-color: #da4f49;
-		border: 1px solid #bd362f;
-	}
-	.btn-danger:hover {
-		color: #fff;
-		background-color: #bd362f;
-	}
-	.btn-edit {
-		color: #fff;
-		background-color: skyblue;
-		border: 1px solid skyblue;
-	}
-	.btn-edit:hover {
-		color: #fff;
-		background-color: skyblue;
-	}
-	.btn:focus {
-		outline: none;
-	}
-	.todo-container {
-		width: 600px;
-		margin: 0 auto;
-	}
-	.todo-container .todo-wrap {
-		padding: 10px;
-		border: 1px solid #ddd;
-		border-radius: 5px;
+<style scoped>
+	.container{
+		display: flex;
+		justify-content: space-around;
 	}
 </style>
