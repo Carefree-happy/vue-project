@@ -4,13 +4,19 @@
 		<div>
 			<ul class="nav nav-tabs">
 				<li>
-					<router-link replace class="list-group-item" active-class="active" to="/home/news">News</router-link>
+					<router-link class="list-group-item" active-class="active" to="/home/news">News</router-link>
 				</li>
 				<li>
-					<router-link replace class="list-group-item" active-class="active" to="/home/message">Message</router-link>
+					<router-link class="list-group-item" active-class="active" to="/home/message">Message</router-link>
 				</li>
 			</ul>
-			<router-view></router-view>
+			<!-- 缓存多个路由组件 -->
+			<!-- <keep-alive :include="['News','Message']"> -->
+				
+			<!-- 缓存一个路由组件，跟组件内名称name相对应，否则不生效 -->
+			<keep-alive include="NewsInfo">
+				<router-view></router-view>
+			</keep-alive>
 		</div>
 	</div>
 </template>
