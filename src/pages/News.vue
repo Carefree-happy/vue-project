@@ -1,5 +1,6 @@
 <template>
 	<ul>
+		<li :style="{opacity}">欢迎学习Vue</li>
 		<li>news001 <input type="text"></li>
 		<li>news002 <input type="text"></li>
 		<li>news003 <input type="text"></li>
@@ -9,6 +10,11 @@
 <script>
 	export default {
 		name:'NewsInfo',
+		data() {
+			return {
+				opacity:1
+			}
+		},
 		beforeDestroy() {
 			console.log('News组件即将被销毁了')
 		},
