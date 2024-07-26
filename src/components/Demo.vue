@@ -14,7 +14,7 @@
 </template>
 
 <script>
-	import {ref,watch} from 'vue'
+	import {ref, watchEffect} from 'vue'
 	export default {
 		name: 'DemoInfo',
 		setup(){
@@ -33,13 +33,21 @@
 
 			console.log(person)
 
-			watch(sum,(newValue,oldValue)=>{
-				console.log('sum的值变化了',newValue,oldValue)
-			})
+			// watch(sum,(newValue,oldValue)=>{
+			// 	console.log('sum的值变化了',newValue,oldValue)
+			// })
 
-			watch(person,(newValue,oldValue)=>{
-				console.log('person的值变化了',newValue,oldValue)
-			},{deep:true})
+			// watch(person,(newValue,oldValue)=>{
+			// 	console.log('person的值变化了',newValue,oldValue)
+			// },{deep:true})
+
+			// 也是不能解决对象的变化，必须指定到位
+			watchEffect(()=>{
+				const x1 = sum.value
+				const x2 = person.value.job.j1.salary
+				console.log(x1, x2)
+				console.log('watchEffect所指定的回调执行了')
+			})
 
 
 			//返回一个对象（常用）
