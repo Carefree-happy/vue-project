@@ -1,64 +1,26 @@
 <template>
-	<h1>一个人的信息</h1>
-	<h2>姓名：{{person.name}}</h2>
-	<h2>年龄：{{person.age}}</h2>
-	<h2 v-show="person.sex">性别：{{person.sex}}</h2>
-	<button @click="addInfo">修改人的信息</button>
-	<button @click="delInfo">删除人的信息</button>
-	<h3>工作种类：{{person.job.type}}</h3>
-	<h3>工作薪水：{{person.job.salary}}</h3>
-	<h3>爱好：{{person.hobby}}</h3>
-	<h3>测试的数据c：{{person.job.a.b.c}}</h3>
-	<button @click="changeInfo">修改人的信息</button>
+	<Demo @hello="showHelloMsg" msg="你好啊" school="尚硅谷">
+		<template v-slot:qwe>
+			<span>尚硅谷</span>
+		</template>
+		<template v-slot:asd>
+			<span>尚硅谷</span>
+		</template>
+	</Demo>
 </template>
 
 <script>
-	import {reactive} from 'vue'
+	import Demo from './components/Demo.vue'
 	export default {
 		name: 'App',
+		components:{Demo},
 		setup(){
-			//数据
-			let person = reactive({
-				name:'张三',
-				age:18,
-				job:{
-					type:'前端工程师',
-					salary:'30K',
-					a:{
-						b:{
-							c:666
-						}
-					}
-				},
-				hobby:['抽烟','喝酒','烫头']
-			})
-
-			function addInfo() {
-				person.sex = '男'
-			} 
-
-			function delInfo() {
-				delete person.sex
-			} 
-
-			//方法
-			function changeInfo(){
-				person.name = '李四'
-				person.age = 48
-				person.job.type = 'UI设计师'
-				person.job.salary = '60K'
-				person.job.a.b.c = 999
-				person.hobby[0] = '学习'
+			function showHelloMsg(value){
+				alert(`你好啊，你触发了hello事件，我收到的参数是:${value}！`)
 			}
-
-			//返回一个对象（常用）
 			return {
-				person,
-				changeInfo,
-				addInfo,
-				delInfo
+				showHelloMsg
 			}
 		}
 	}
 </script>
-
