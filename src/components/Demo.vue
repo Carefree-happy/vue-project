@@ -1,6 +1,6 @@
 <template>
 	<h4>{{person}}</h4>
-	<h2 @click="city+=',,,'">姓名：{{city}}</h2>
+	<h2 @click="city+=',,,'">年级：{{school.class}}</h2>
 	<h2>姓名：{{name}}</h2>
 	<h2>年龄：{{age}}</h2>
 	<h2>薪资：{{job.j1.salary}}K</h2>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-	import {ref,reactive,toRef,toRefs} from 'vue'
+	import {ref,reactive, shallowReadonly,} from 'vue'
 	export default {
 		name: 'DemoInfo',
 		setup(){
@@ -28,24 +28,13 @@
 					}
 				}
 			})
-
-			const class1 = school.class
-			console.log('%%%',class1)
-
-			// const class2 = toRef(school,'class')
-			// console.log('####',class2)
-
-			const x = toRefs(person)
-			console.log('******',x)
+			person = shallowReadonly(person)
 
 			//返回一个对象（常用）
 			return {
 				city,
-				person,
-				name:toRef(school,'class1'),
-				// age:toRef(person,'age'),
-				// salary:toRef(person.job.j1,'salary'),
-				...toRefs(person)
+				school,
+				...person,
 			}
 		}
 	}
