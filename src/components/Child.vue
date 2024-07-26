@@ -1,15 +1,23 @@
 <template>
 	<div class="child">
 		<h3>我是Child组件</h3>
-		<Son/>
+		{{sum}}
 	</div>
 </template>
 
 <script>
-	import Son from './Son.vue'
+	import {ref} from 'vue'
 	export default {
 		name:'ChildInfo',
-		components:{Son},
+		async setup(){
+			let sum = ref(0)
+			let p = new Promise((resolve)=>{
+				setTimeout(()=>{
+					resolve({sum})
+				},3000)
+			})
+			return await p
+		}
 	}
 </script>
 
